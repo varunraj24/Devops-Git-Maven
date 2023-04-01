@@ -41,10 +41,10 @@ pipeline {
                 steps 
                 {
                     
-                    sh 'docker build . -t varunraj25/app12:test'
+                    sh 'docker build . -t varunraj25/app13:test'
                     sh 'docker login -u varunraj25 -p dckr_pat__43Z1MAoTSoPf8AJhVgj8KaQlrA'
-                    sh 'docker push varunraj25/app12:test'
-                    sh 'docker run -p 86:8080 -d varunraj25/app12:test'
+                    sh 'docker push varunraj25/app13:test'
+                    sh 'docker run -p 86:8080 -d varunraj25/app13:test'
                    
                 }
             }
