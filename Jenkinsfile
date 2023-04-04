@@ -17,7 +17,7 @@ pipeline {
             stage ('AppCodeCheckout') {
                 steps {
 
-                    git 'https://github.com/gcpcloudreddy/pylife-devops-demo.git'
+                    git 'https://github.com/varunraj24/Devops-Git-Maven.git'
 
                 }
             }
