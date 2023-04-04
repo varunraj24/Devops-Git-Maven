@@ -35,26 +35,16 @@ pipeline {
                
 
                 steps {
-                    withCredentials([string(credentialsId: 'DOCKERPWD', variable: 'DOCKER_TOKEN')]) {
-
-
-                    sh 'docker build . -t pylifedevops/app30:test'
-                    sh 'docker login -u pylifedevops -p ${DOCKER_TOKEN}'
-                    sh 'docker push pylifedevops/app30:test'
-                   // sh 'docker run -p 89:8080 -d pylifedevops/app30:test'
-                }
+                    
+                    sh 'docker build . -t varunraj25/app13:test'
+                    sh 'docker login -u varunraj25 -p dckr_pat__43Z1MAoTSoPf8AJhVgj8KaQlrA'
+                    sh 'docker push varunraj25/app13:test'
+                    sh 'docker run -p 86:8080 -d varunraj25/app13:test'
 
                 }
             
         }
 
-            stage('Archive and clean workspace') {
-                steps {
-                    
-                    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
-                    cleanWs()
-                }
 
             }
         }  
-}
