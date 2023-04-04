@@ -1,0 +1,38 @@
+pipeline {
+    agent {
+        node {
+            label 'java11'
+        }   
+    }
+    options {
+                timestamps()
+                buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '2'))
+                timeout(time: 240, unit: 'MINUTES')
+                disableConcurrentBuilds()
+                }
+        stages {
+            stage ('AppCodeCheckout') {
+                steps {
+
+                    git 'https://github.com/varunraj24/Devops-Git-Maven.git'
+
+                }
+            }
+            stage ('CI Build') {
+                steps {
+                    sh 'mvn clean package'                  
+                     }   
+            }
+            stage ('Docker Build && Push && DEPLOY ') {
+                steps {
+                    withCredentials([string(credentialsId: 'DOCKER_PWD', variable: 'DOCKER_TOKEN')]) {
+                            // some block                
+                    sh 'docker build . -t varunraj25/app13:test'
+                    sh 'docker login -u varunraj25 -p ${DOCKER_TOKEN}'
+                    sh 'docker push varunraj25/app13:test'
+                    //sh 'docker run -p 86:8080 -d varunraj25/app13:test'
+                }
+                }          
+        }
+            }
+        }  
