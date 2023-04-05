@@ -32,7 +32,14 @@ pipeline {
                     sh 'docker push varunraj25/app13:test'
                     //sh 'docker run -p 86:8080 -d varunraj25/app13:test'
                 }
-                }          
+                }
+            stage('Archive and Delete workspace') 
+            {
+                steps{
+                    cleanWs()
+                    archiveArtifacts artifacts: 'target/demo*.jar', followSymlinks: false
+                }
+            }         
         }
             }
         }  
